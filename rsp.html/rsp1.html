@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.game {
+    margin-top: 50px;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #333;
+}
+</style>
+    <title>Rock Paper Scissors Game</title>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <div class="game">
+        <div class="options">
+            <button class="btn" id="rock">Rock</button>
+            <button class="btn" id="paper">Paper</button>
+            <button class="btn" id="scissors">Scissors</button>
+        </div>
+        <div class="result">
+            <p>Make your choice...</p>
+        </div>
+    </div>
+    <script >const buttons = document.querySelectorAll('.btn');
+const resultText = document.querySelector('.result p');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        const playerSelection = button.id;
+        const computerSelection = computerPlay();
+        const result = playRound(playerSelection, computerSelection);
+        resultText.textContent = result;
+    });
+});
+
+function computerPlay() {
+    const choices = ['rock', 'paper', 'scissors'];
+    const randomIndex = Math.floor(Math.random() * 3);
+    return choices[randomIndex];
+}
+
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+        return 'It\'s a tie!';
+    } else if (
+        (playerSelection === 'rock' && computerSelection === 'scissors') ||
+        (playerSelection === 'paper' && computerSelection === 'rock') ||
+        (playerSelection === 'scissors' && computerSelection === 'paper')
+    ) {
+        return `You win! ${playerSelection} beats ${computerSelection}`;
+    } else {
+        return `You lose! ${computerSelection} beats ${playerSelection}`;
+    }
+}
+
+</script>
+</body>
+</html>
